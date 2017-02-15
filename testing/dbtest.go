@@ -3,7 +3,8 @@ package dbtest
 import (
 	"database/sql"
 	"fmt"
-	"main/util/mysql"
+
+	"github.com/pascallouisperez/gomysql"
 
 	. "gopkg.in/check.v1"
 )
