@@ -14,12 +14,12 @@ import (
 func GetTestDatabase(c *C, dbName string, migrations string) *sql.DB {
 	createTestDatabase(c, dbName)
 
-	dsn := mysql.DefaultMysqlDsn()
+	dsn := gomysql.DefaultMysqlDsn()
 	dsn.DbName = dbName
 	db, err := dsn.Open()
 	c.Assert(err, IsNil)
 
-	err = mysql.Migrate(db, migrations)
+	err = gomysql.Migrate(db, migrations)
 	c.Assert(err, IsNil)
 
 	return db
@@ -30,7 +30,7 @@ func GetTestDatabase(c *C, dbName string, migrations string) *sql.DB {
 // This function either succeeds, or aborts the test, and can therefore
 // be used as a statement.
 func createTestDatabase(c *C, dbName string) {
-	dsn := mysql.DefaultMysqlDsn()
+	dsn := gomysql.DefaultMysqlDsn()
 	dsn.DbName = ""
 
 	db, err := dsn.Open()
