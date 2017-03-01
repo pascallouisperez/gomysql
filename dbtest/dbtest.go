@@ -11,7 +11,7 @@ import (
 
 // getTestDatabase gets a test database which is ready for tests to be ran
 // against.
-func GetTestDatabase(c *C, dbName string, migrations string) *sql.DB {
+func GetTestDatabase(c *C, dbName string, migrations ...string) *sql.DB {
 	createTestDatabase(c, dbName)
 
 	dsn := gomysql.DefaultMysqlDsn()
@@ -19,8 +19,10 @@ func GetTestDatabase(c *C, dbName string, migrations string) *sql.DB {
 	db, err := dsn.Open()
 	c.Assert(err, IsNil)
 
-	err = gomysql.Migrate(db, migrations)
-	c.Assert(err, IsNil)
+	for _, migrationPath := range migrations {
+		err = gomysql.Migrate(db, migrationPath)
+		c.Assert(err, IsNil)
+	}
 
 	return db
 }
