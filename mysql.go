@@ -39,7 +39,6 @@ func (dsn *MysqlDsn) FillDefaults() {
 	}
 	if len(dsn.Params) == 0 {
 		dsn.Params = map[string]string{
-			"strict":    "true",
 			"sql_notes": "false",
 		}
 	}
