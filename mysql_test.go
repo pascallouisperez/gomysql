@@ -61,7 +61,6 @@ func (_ *MysqlSuite) TestMysqlDsn_defaults(c *C) {
 	c.Assert(dsn.Address, Equals, "localhost:3306")
 	c.Assert(dsn.DbName, Equals, "")
 	c.Assert(dsn.Params, DeepEquals, map[string]string{
-		"strict":    "true",
 		"sql_notes": "false",
 	})
 }
